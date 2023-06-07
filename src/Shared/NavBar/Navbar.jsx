@@ -17,17 +17,38 @@ const Navbar = () => {
     /* name, Home, Instructors, Classes, Dashboard and User profile picture. The user profile picture and Dashboard on the navbar are conditional. If the user is signed in, the navbar will show the profile picture; otherwise, it will show the Login button. */
     <>
       <li className="">
-        <NavLink className={"navitem"} to={"/"}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " border-b-2 border-orange-400 navitem"
+              : "text-black navitem"
+          }
+          to={"/"}
+        >
           Home
         </NavLink>
       </li>
       <li className="">
-        <NavLink className={"navitem"} to={"/"}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " border-b-2 border-orange-400 navitem"
+              : "text-black navitem"
+          }
+          to={"/instructors"}
+        >
           Instructors
         </NavLink>
       </li>
       <li className="">
-        <NavLink className={"navitem"} to={"/"}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " border-b-2 border-orange-400 navitem"
+              : "text-black navitem"
+          }
+          to={"/classes"}
+        >
           Classes
         </NavLink>
       </li>
@@ -35,7 +56,14 @@ const Navbar = () => {
       {user ? (
         <>
           <li className="">
-            <NavLink className={"navitem"} to={"/"}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? " border-b-2 border-orange-400 navitem"
+                  : "text-black navitem"
+              }
+              to={"/dashboard"}
+            >
               Dashboard
             </NavLink>
           </li>
@@ -60,7 +88,14 @@ const Navbar = () => {
           {" "}
           <li className="">
             {" "}
-            <NavLink className={"navitem"} to={"/login"}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? " border-b-2 border-orange-400 navitem"
+                  : "text-black navitem"
+              }
+              to={"/login"}
+            >
               Log In
             </NavLink>
           </li>
