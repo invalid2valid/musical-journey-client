@@ -24,15 +24,17 @@ const SignUp = () => {
     const url =
       "https://api.imgbb.com/1/upload?key=ffdfe5e4bf8343c330ab6b652b624de0";
 
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        setImageURL(imageData.data.url);
-        console.log(imageData.data.url);
-      });
+    async () => {
+      await fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((imageData) => {
+          setImageURL(imageData.data.url);
+          console.log(imageData.data.url);
+        });
+    };
 
     const userDetails = {
       name,
