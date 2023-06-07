@@ -3,9 +3,16 @@ import { Link, NavLink } from "react-router-dom";
 import Logo from "../../Component/Logo/Logo";
 import "./navbar.css";
 import { AuthContext } from "../../Utils/AuthProvider/AuthProvider";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+
+  const toLogout = () => {
+    logOut();
+  };
+
   const list = (
     /* name, Home, Instructors, Classes, Dashboard and User profile picture. The user profile picture and Dashboard on the navbar are conditional. If the user is signed in, the navbar will show the profile picture; otherwise, it will show the Login button. */
     <>
@@ -25,23 +32,40 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      <li className="">
-        <NavLink className={"navitem"} to={"/"}>
-          Dashboard
-        </NavLink>
-      </li>
-      <li className="">
-        <img
-          className="h-10 rounded-full"
-          src="https://w7.pngwing.com/pngs/754/2/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere-thumbnail.png"
-          alt=""
-        />
-      </li>
-      <li className="">
-        <NavLink className={"navitem"} to={"/login"}>
-          Log In
-        </NavLink>
-      </li>
+      {user ? (
+        <>
+          <li className="">
+            <NavLink className={"navitem"} to={"/"}>
+              Dashboard
+            </NavLink>
+          </li>
+          <li className="">
+            <button onClick={toLogout} className={"navitem"} to={"/"}>
+              Logout
+            </button>
+          </li>
+          <li className="">
+            <img
+              className="h-10 rounded-full"
+              src={user.photoURL}
+              data-tooltip-id="id-name"
+              data-tooltip-content={user.displayName}
+              alt=""
+            />{" "}
+            <Tooltip id="id-name" />{" "}
+          </li>{" "}
+        </>
+      ) : (
+        <>
+          {" "}
+          <li className="">
+            {" "}
+            <NavLink className={"navitem"} to={"/login"}>
+              Log In
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
