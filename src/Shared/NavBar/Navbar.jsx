@@ -75,9 +75,9 @@ const Navbar = () => {
           <li className="">
             <img
               className="h-10 rounded-full"
-              src={user.photoURL}
+              src={user?.photoURL}
               data-tooltip-id="id-name"
-              data-tooltip-content={user.displayName}
+              data-tooltip-content={user?.displayName}
               alt=""
             />{" "}
             <Tooltip id="id-name" />{" "}

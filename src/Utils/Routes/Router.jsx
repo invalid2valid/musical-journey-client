@@ -3,6 +3,7 @@ import LandingPage from "../../Pages/Home/Home/LandingPage";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPAge";
 import SignUp from "../../Pages/Registation/SignUp";
 import Login from "../../Pages/Registation/Login";
+import Test from "../../Component/Test";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "test",
+        element: <Test></Test>,
       },
     ],
   },
