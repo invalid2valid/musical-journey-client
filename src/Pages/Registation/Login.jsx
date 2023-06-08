@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Utils/AuthProvider/AuthProvider";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
   const loacation = useLocation();
+  const [seePass, setSeePass] = useState(true);
   const from = loacation.state?.from?.pathname || "/";
   const [error, setError] = useState("");
   const { signIn, googleLogIn } = useContext(AuthContext);
@@ -23,7 +25,7 @@ const Login = () => {
       })
       .catch((error) => {
         // form.reset();
-        console.log(error.message);
+        setError(error.message);
       });
   };
 
@@ -52,13 +54,25 @@ const Login = () => {
             className="input   w-full "
             required
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="input   w-full "
-            required
-          />
+          <div className=" relative flex items-center">
+            <input
+              type={seePass ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              className="input   w-full "
+              required
+            />
+            <div
+              className="bg-blue-100 absolute p-3 right-0 rounded-lg"
+              onClick={() => setSeePass(!seePass)}
+            >
+              {seePass ? (
+                <FaEyeSlash className="  text-3xl"></FaEyeSlash>
+              ) : (
+                <FaEye className="  text-3xl"></FaEye>
+              )}
+            </div>
+          </div>
 
           <input type="Submit" className="input   w-full " />
         </form>
@@ -70,9 +84,12 @@ const Login = () => {
           Log In With Google
         </button>
 
-        <Link className="text-center w-full text-red-500" to={"/signup"}>
-          Dont Have any account? Sign Up
+        <Link className="text-center w-full " to={"/signup"}>
+          Dont Have any account? <span className="text-red-600">Sign Up.</span>
         </Link>
+        <div className="text-center text-red-600 my-5">
+          <p> {error} </p>
+        </div>
       </div>
     </div>
   );

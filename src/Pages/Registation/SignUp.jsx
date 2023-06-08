@@ -6,7 +6,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const loacation = useLocation();
   const [error, setError] = useState("");
-  const [imageURL, setImageURL] = useState(null);
+  // const [imageURL, setImageURL] = useState(null);
   const from = loacation.state?.from?.pathname || "/";
   const { createUser, googleLogIn, updateNamePhoto } = useContext(AuthContext);
 
@@ -18,35 +18,19 @@ const SignUp = () => {
     const email = form.email.value;
     const password1 = form.password1.value;
     const password2 = form.password2.value;
-    const photo = form.photoURL.files[0];
-    const formData = new FormData();
-    formData.append("image", photo);
-    const url =
-      "https://api.imgbb.com/1/upload?key=ffdfe5e4bf8343c330ab6b652b624de0";
-
-    async () => {
-      await fetch(url, {
-        method: "POST",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((imageData) => {
-          setImageURL(imageData.data.url);
-          console.log(imageData.data.url);
-        });
-    };
+    const photo = form.photoURL.value;
 
     const userDetails = {
       name,
       email,
       password1,
       password2,
-      imageURL,
+      photo,
     };
     console.log(userDetails);
 
     if (userDetails.password1 !== userDetails.password2) {
-      console.log("Password did not match");
+      setError("Password did not match");
     } else {
       const isValidPassword =
         /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/.test(
@@ -65,12 +49,25 @@ const SignUp = () => {
           .catch((error) => {
             setError(error.message);
             console.log(error);
-            console.log(" from error");
           });
       } else {
         console.log("Password does not meet the requirements.");
       }
     }
+    const userForDatabase = {
+      name,
+      email,
+      role: "student",
+    };
+    fetch(`http://localhost:8000/users/${email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userForDatabase),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   const clickedGoogle = () => {
@@ -78,12 +75,35 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+
+        // const userForgoogledata = {
+        //   name: user.displayName,
+        //   email: user.email,
+        //   role: "student",
+        // };
+        // console.log(userForgoogledata, "fetch google");
+
+        fetch(`http://localhost:8000/users/${user.email}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: user.displayName,
+            email: user.email,
+            role: "student",
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+
         navigate(from, { replace: true });
       })
       .catch((error) => {
         setError(error.message);
         console.log(error);
       });
+
     console.log("google clicked");
   };
 
@@ -121,8 +141,8 @@ const SignUp = () => {
           />
           <input
             name="photoURL"
-            type="file"
-            placeholder=""
+            type="url"
+            placeholder="Photo URL"
             className="input   w-full "
             required
           />
@@ -133,6 +153,9 @@ const SignUp = () => {
         <button onClick={clickedGoogle} className="input  w-full  text-bold ">
           Sign up With Google
         </button>
+        <div className="text-center text-red-600 my-5">
+          <p> {error} </p>
+        </div>
       </div>
     </div>
   );

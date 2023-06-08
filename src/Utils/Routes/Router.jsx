@@ -7,6 +7,7 @@ import Test from "../../Component/Test";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import Instructors from "../../Pages/Instructors/Instructors";
 import Classes from "../../Pages/Classes/Classes";
+import Home from "../../Pages/Home/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Child</h1>,
+        element: <Home></Home>,
       },
       {
         path: "login",
