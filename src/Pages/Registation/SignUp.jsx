@@ -57,6 +57,7 @@ const SignUp = () => {
     const userForDatabase = {
       name,
       email,
+      photo,
       role: "student",
     };
     fetch(`http://localhost:8000/users/${email}`, {
@@ -92,6 +93,8 @@ const SignUp = () => {
             name: user.displayName,
             email: user.email,
             role: "student",
+            students: 0,
+            photo: user.photoURL,
           }),
         })
           .then((res) => res.json())

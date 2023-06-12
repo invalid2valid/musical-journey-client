@@ -6,12 +6,12 @@ const Classes = () => {
   const [classesData, setClassesData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/classes")
+    fetch("http://localhost:8000/classesapproved")
       .then((res) => res.json())
       .then((data) => setClassesData(data));
   }, []);
 
-  console.log(classesData);
+  // console.log(classesData);
   return (
     <div className="my-10">
       <h1 className="text-4xl font-bold text-center">Our All Course</h1>

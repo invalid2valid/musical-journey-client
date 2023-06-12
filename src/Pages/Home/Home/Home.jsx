@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import Container from "../../../Component/Container";
+import ClassCard from "../../Classes/ClassCard";
+import { motion } from "framer-motion";
+import { Fade, Slide } from "react-awesome-reveal";
+import useUser from "../../../Utils/Hooks/UserHooks";
+import InstroctorCard from "../../../Component/instroctor/instroctorCard";
 
 const Home = () => {
+  const [classesData, setClassesData] = useState([]);
+  const users = useUser();
+  // console.log(users);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/classesapproved")
+      .then((res) => res.json())
+      .then((data) => setClassesData(data.slice(0, 6)));
+  }, []);
   return (
     <div>
       <Container>
@@ -64,6 +78,84 @@ const Home = () => {
           Many desktop publishing packages and web page editors now use Lorem
           Ipsum as their default model text
         </p>
+        <div className=" mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
+          {classesData.map((item) => (
+            <ClassCard key={item._id} item={item}></ClassCard>
+          ))}
+        </div>
+
+        <h1 className="text-4xl text-center font-semibold my-20 mb-10 border-b-2 rounded-lg w-28 mx-auto border-red-400">
+          FAQ
+        </h1>
+        <div>
+          <div
+            tabIndex={0}
+            className="collapse collapse-plus border border-base-300 bg-base-200 my-5"
+          >
+            {/*  question */}
+            <div className="collapse-title text-xl font-medium">
+              What is musical instruments?
+            </div>
+            <div className="collapse-content">
+              <p>
+                Musical instrument | History, Characteristics, Examples ...
+                musical instrument, any device for producing a musical sound.
+                The principal types of such instruments, classified by the
+                method of producing sound, are percussion, stringed, keyboard,
+                wind, and electronic.
+              </p>
+            </div>
+          </div>
+          <div
+            tabIndex={0}
+            className="collapse collapse-plus border border-base-300 bg-base-200 my-5"
+          >
+            {/*  question */}
+            <div className="collapse-title text-xl font-medium">
+              How to learn music?
+            </div>
+            <div className="collapse-content">
+              <p>
+                Practice playing notes, chords, and scales on your instrument.
+                After you've mastered the concepts of notes, chords, and scales,
+                learning how to produce these sounds with your instrument is the
+                first step to learning how to play music. Start by practicing
+                notes first, then move on to scales, and finally to chords.
+              </p>
+            </div>
+          </div>
+          <div
+            tabIndex={0}
+            className="collapse collapse-plus border border-base-300 bg-base-200 my-5"
+          >
+            {/*  question */}
+            <div className="collapse-title text-xl font-medium">
+              what is musical instruments?
+            </div>
+            <div className="collapse-content">
+              <p>
+                Musical instrument | History, Characteristics, Examples ...
+                musical instrument, any device for producing a musical sound.
+                The principal types of such instruments, classified by the
+                method of producing sound, are percussion, stringed, keyboard,
+                wind, and electronic.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h1 className="text-4xl font-semibold text-center">
+            Our Popular Instroctor
+          </h1>
+          <p className="text-center border-b-2 w-2/3 mx-auto m-3 rounded-lg border-red-600">
+            Learn from the best teachers.
+          </p>
+          <div className=" mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
+            {users.slice(0, 6).map((item) => (
+              <InstroctorCard key={item._id} item={item}></InstroctorCard>
+            ))}
+          </div>
+        </div>
       </Container>
     </div>
   );

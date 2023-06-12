@@ -1,31 +1,101 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Fade } from "react-awesome-reveal";
+import { AuthContext } from "../../Utils/AuthProvider/AuthProvider";
 
 const ClassCard = ({ item }) => {
+  const { user, reload } = useContext(AuthContext);
+  const [role, setRole] = useState({});
+  const [singleUser, setSingleUser] = useState();
+
+  const [isDisable, setIsDisable] = useState(false);
+
+  useEffect(() => {
+    if (user && user.email) {
+      setSingleUser(user.email);
+    }
+  }, [user, reload]);
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/getrole/${singleUser}`)
+      .then((res) => res.json())
+      // .then((data) => console.log(data))
+      .then((data) => setRole(data))
+      //   .then((data) => console.log(typeof data))
+      .catch((error) => console.log(error));
+    // console.log(e);
+  }, [reload, user]);
+
   const {
     image,
     name,
-    _id,
+    students,
     instructor_name,
     instructor_email,
     available_seats,
     price,
   } = item;
   // console.log(item);
+  useEffect(() => {
+    if (!available_seats && role !== "student") {
+      setIsDisable(true);
+    }
+  }, []);
+
+  const addClassToDatabase = () => {
+    fetch("http://localhost:8000/addselectedclass", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        image,
+        name,
+        students,
+        instructor_name,
+        instructor_email,
+        available_seats,
+        price,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
-    <div className="card w-96 glass">
-      <figure>
-        <img src={image} alt="car!" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{name}</h2>
-        <p>Instructor name: {instructor_name}</p>
-        <p>Available seats: {available_seats}</p>
-        <p>Price: ${price}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Select</button>
+    <Fade delay={0} cascade damping={1e-2}>
+      <div
+        className="card w-96 glass "
+        style={{
+          backgroundColor: available_seats ? "" : "red",
+        }}
+      >
+        <figure>
+          <img src={image} alt="car!" />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">{name}</h2>
+          <p>Instructor name: {instructor_name}</p>
+          <p>Available seats: {available_seats}</p>
+          <p>Price: ${price}</p>
+          <p>Students: {students}</p>
+          <div className="card-actions justify-end">
+            <button
+              onClick={addClassToDatabase}
+              className="btn btn-primary"
+              disabled={isDisable}
+            >
+              Select
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Fade>
   );
 };
 

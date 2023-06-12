@@ -18,6 +18,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [reload, setReload] = useState(false);
 
   // create user by email and password
   const createUser = (email, password) => {
@@ -72,6 +73,8 @@ const AuthProvider = ({ children }) => {
     googleLogIn,
     loading,
     updateNamePhoto,
+    reload,
+    setReload,
   };
   // console.log(user);
   return (
