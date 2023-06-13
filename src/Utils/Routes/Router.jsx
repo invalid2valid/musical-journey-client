@@ -14,6 +14,8 @@ import SelectedClasses from "../../Pages/Dashboard/Student/SelectedClasses/Selec
 import AddClass from "../../Pages/Dashboard/Instractor/AddClass";
 import InsClasses from "../../Pages/Dashboard/Instractor/InsClasses";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import InstroctorRoute from "./InstroctorRoute";
 // import SelectedClasses from "../../Pages/Dashboard/Student/SelectedClasses/SelectedClasses";
 
 const router = createBrowserRouter([
@@ -62,11 +64,21 @@ const router = createBrowserRouter([
     children: [
       {
         path: "allusers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "class",
-        element: <AllClasses></AllClasses>,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllClasses></AllClasses>{" "}
+          </AdminRoute>
+        ),
       },
       {
         path: "selectedclasses",
@@ -74,11 +86,20 @@ const router = createBrowserRouter([
       },
       {
         path: "addclass",
-        element: <AddClass></AddClass>,
+        element: (
+          <InstroctorRoute>
+            <AddClass></AddClass>{" "}
+          </InstroctorRoute>
+        ),
       },
       {
         path: "insclasses",
-        element: <InsClasses></InsClasses>,
+        element: (
+          <InstroctorRoute>
+            {" "}
+            <InsClasses></InsClasses>
+          </InstroctorRoute>
+        ),
       },
     ],
   },
