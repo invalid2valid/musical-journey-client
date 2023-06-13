@@ -18,6 +18,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setClassesData(data.slice(0, 6)));
   }, []);
+
   return (
     <div>
       <Container>
