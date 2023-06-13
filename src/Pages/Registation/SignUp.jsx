@@ -112,6 +112,9 @@ const SignUp = () => {
 
   return (
     <div className="w-full h-[90vh] flex justify-center items-center">
+      <Helmet>
+        <title>Sign Up</title>
+      </Helmet>
       <div className="bg-blue-100 md:w-2/4 m-4 p-4 rounded-br-2xl rounded-tl-2xl ">
         <form onSubmit={handleSignUp} className="flex flex-col gap-4">
           <input

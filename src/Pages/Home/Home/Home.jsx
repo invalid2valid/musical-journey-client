@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Home</title>
+        <title>Musical Journey</title>
       </Helmet>
       <Container>
         <AwesomeSlider className="mb-20">
