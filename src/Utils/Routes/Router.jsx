@@ -13,6 +13,7 @@ import AllClasses from "../../Pages/Dashboard/Admin/AllClasses/AllClasses";
 import SelectedClasses from "../../Pages/Dashboard/Student/SelectedClasses/SelectedClasses";
 import AddClass from "../../Pages/Dashboard/Instractor/AddClass";
 import InsClasses from "../../Pages/Dashboard/Instractor/InsClasses";
+import PrivateRoute from "./PrivateRoute";
 // import SelectedClasses from "../../Pages/Dashboard/Student/SelectedClasses/SelectedClasses";
 
 const router = createBrowserRouter([
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "allusers",

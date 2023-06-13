@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../Component/Logo/Logo";
 import "./navbar.css";
@@ -8,14 +8,35 @@ import { Tooltip } from "react-tooltip";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   // console.log(user);
+  const [isDark, setIsDark] = useState(false);
 
   const toLogout = () => {
     logOut();
   };
 
+  useEffect(() => {
+    if (isDark) {
+      document.querySelector("html").setAttribute("data-theme", "dark");
+    } else {
+      document.querySelector("html").setAttribute("data-theme", "light");
+    }
+  }, [isDark]);
+
   const list = (
     /* name, Home, Instructors, Classes, Dashboard and User profile picture. The user profile picture and Dashboard on the navbar are conditional. If the user is signed in, the navbar will show the profile picture; otherwise, it will show the Login button. */
     <>
+      <li>
+        <div className="form-control ">
+          <label className="cursor-pointer label">
+            {/* <span className="label-text">Remember me</span> */}
+            <input
+              type="checkbox"
+              onClick={() => setIsDark(!isDark)}
+              className="toggle toggle-primary"
+            />
+          </label>
+        </div>
+      </li>
       <li className="">
         <NavLink
           className={({ isActive }) =>
