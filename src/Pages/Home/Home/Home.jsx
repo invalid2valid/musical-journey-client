@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Fade, Slide } from "react-awesome-reveal";
 import useUser from "../../../Utils/Hooks/UserHooks";
 import InstroctorCard from "../../../Component/instroctor/instroctorCard";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [classesData, setClassesData] = useState([]);
@@ -21,6 +22,9 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Container>
         <AwesomeSlider className="mb-20">
           <div className="relative">
