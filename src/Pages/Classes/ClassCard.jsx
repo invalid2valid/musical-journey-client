@@ -10,12 +10,12 @@ const ClassCard = ({ item }) => {
   const { user, reload } = useContext(AuthContext);
   const [role, setRole] = useState({});
   const [singleUser, setSingleUser] = useState();
-  console.log(singleUser);
+  // console.log(singleUser);
   const [isDisable, setIsDisable] = useState(false);
   const notify = () => toast("Class added!");
 
   useEffect(() => {
-    if (user) {
+    if (user && user.email) {
       setSingleUser(user.email);
     } else {
       setIsDisable(true);
@@ -23,7 +23,9 @@ const ClassCard = ({ item }) => {
   }, [user, reload]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/getrole/${singleUser}`)
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/getrole/${singleUser}`
+    )
       .then((res) => res.json())
       // .then((data) => console.log(data))
       .then((data) => setRole(data))
@@ -43,28 +45,31 @@ const ClassCard = ({ item }) => {
   } = item;
   // console.log(item);
   useEffect(() => {
-    if (!available_seats && role !== "student") {
+    if (!available_seats && role.role !== "student") {
       setIsDisable(true);
     }
-  }, [user]);
-
+  }, [user, reload, role]);
+  console.log(role);
   const addClassToDatabase = () => {
-    fetch("http://localhost:8000/addselectedclass", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        image,
-        name,
-        students,
-        instructor_name,
-        instructor_email,
-        available_seats,
-        price,
-        student_email: user.email,
-      }),
-    })
+    fetch(
+      "https://summer-school-server-invalid2valid.vercel.app/addselectedclass",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image,
+          name,
+          students,
+          instructor_name,
+          instructor_email,
+          available_seats,
+          price,
+          student_email: user.email,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         Swal.fire({

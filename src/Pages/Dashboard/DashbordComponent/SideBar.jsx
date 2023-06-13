@@ -17,7 +17,9 @@ const SideBar = () => {
   //   console.log(singleUser);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/getrole/${singleUser}`)
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/getrole/${singleUser}`
+    )
       .then((res) => res.json())
       .then((data) => setRole(data))
       //   .then((data) => console.log(typeof data))

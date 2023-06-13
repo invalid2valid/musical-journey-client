@@ -15,11 +15,14 @@ const SelectedClassesCard = ({ item, setReload, reload }) => {
   //   console.log(_id);
 
   const deleteOne = (id) => {
-    // fetch(`http://localhost:8000/selectedclasses/64812e9b5d4f51f026815305`, {
+    // fetch(`https://summer-school-server-invalid2valid.vercel.app/selectedclasses/64812e9b5d4f51f026815305`, {
 
-    fetch(`http://localhost:8000/selectedclasses/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/selectedclasses/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

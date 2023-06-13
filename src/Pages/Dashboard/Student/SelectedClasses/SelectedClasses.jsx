@@ -15,7 +15,9 @@ const SelectedClasses = () => {
     }
   }, [user, reload]);
   useEffect(() => {
-    fetch(`http://localhost:8000/selectedclasses/${singleUser}`)
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/selectedclasses/${singleUser}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setClasses(data);

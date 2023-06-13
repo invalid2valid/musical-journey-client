@@ -9,7 +9,7 @@ const AllUsers = () => {
 
   //   console.log(user.email);
   useEffect(() => {
-    fetch("http://localhost:8000/user")
+    fetch("https://summer-school-server-invalid2valid.vercel.app/user")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, [reload]);

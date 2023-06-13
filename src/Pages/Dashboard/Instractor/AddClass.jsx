@@ -35,7 +35,7 @@ const AddClass = () => {
       price,
     };
     // console.log(classDetails);
-    fetch("http://localhost:8000/addclass", {
+    fetch("https://summer-school-server-invalid2valid.vercel.app/addclass", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -15,7 +15,9 @@ const Home = () => {
   // console.log(users);
 
   useEffect(() => {
-    fetch("http://localhost:8000/classesapproved")
+    fetch(
+      "https://summer-school-server-invalid2valid.vercel.app/classesapproved"
+    )
       .then((res) => res.json())
       .then((data) => setClassesData(data.slice(0, 6)));
   }, []);

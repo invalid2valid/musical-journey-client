@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Utils/AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -60,13 +61,16 @@ const SignUp = () => {
       photo,
       role: "student",
     };
-    fetch(`http://localhost:8000/users/${email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userForDatabase),
-    })
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/users/${email}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userForDatabase),
+      }
+    )
       .then((res) => res.json())
       .then((data) => console.log(data));
   };
@@ -84,19 +88,22 @@ const SignUp = () => {
         // };
         // console.log(userForgoogledata, "fetch google");
 
-        fetch(`http://localhost:8000/users/${user.email}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            name: user.displayName,
-            email: user.email,
-            role: "student",
-            students: 0,
-            photo: user.photoURL,
-          }),
-        })
+        fetch(
+          `https://summer-school-server-invalid2valid.vercel.app/users/${user.email}`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              name: user.displayName,
+              email: user.email,
+              role: "student",
+              students: 0,
+              photo: user.photoURL,
+            }),
+          }
+        )
           .then((res) => res.json())
           .then((data) => console.log(data));
 

@@ -16,9 +16,12 @@ const AllClassesCard = ({ item, reload, setReload }) => {
   // console.log(;item._id)
 
   const updateStatus = (status) => {
-    fetch(`http://localhost:8000/classstatus/${item._id}?status=${status}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/classstatus/${item._id}?status=${status}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

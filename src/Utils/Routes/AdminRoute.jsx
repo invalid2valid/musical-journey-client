@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const AdminRoute = () => {
+const AdminRoute = ({ children }) => {
   const [role, setRole] = useState({});
   const [singleUser, setSingleUser] = useState();
 
@@ -17,7 +17,9 @@ const AdminRoute = () => {
   //   console.log(singleUser);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/getrole/${singleUser}`)
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/getrole/${singleUser}`
+    )
       .then((res) => res.json())
       .then((data) => setRole(data))
       //   .then((data) => console.log(typeof data))
@@ -25,15 +27,16 @@ const AdminRoute = () => {
     // console.log(e);
   }, [singleUser, reload]);
   const location = useLocation();
+  console.log(singleUser, role);
 
   if (loading) {
     return <Loader />;
   }
 
-  if (user && role.role == "admin") {
+  if (role.role == "admin") {
     return children;
   }
-  return <Navigate to="/" state={{ from: location }} replace></Navigate>;
+  // return <Navigate to="/" replace></Navigate>;
 };
 
 export default AdminRoute;

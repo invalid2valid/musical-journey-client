@@ -14,7 +14,9 @@ const InsClasses = () => {
   }, []);
   //   console.log(email);
   useEffect(() => {
-    fetch(`http://localhost:8000/insclasses/${email}`)
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/insclasses/${email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setClasses(data);

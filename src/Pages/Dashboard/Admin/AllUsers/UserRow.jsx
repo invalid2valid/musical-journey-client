@@ -11,13 +11,16 @@ const UserRow = ({ user, email, role, name, index, setReload, reload }) => {
   const navigate = useNavigate();
 
   const handaleButton = (r) => {
-    fetch(`http://localhost:8000/user/updaterole?email=${email}&role=${r}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(),
-    })
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/user/updaterole?email=${email}&role=${r}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setReload(!reload);
@@ -56,7 +59,7 @@ const UserRow = ({ user, email, role, name, index, setReload, reload }) => {
           </button>
         )}
       </td>
-      {email !== "admin@admin.com" && (
+      {email !== "admin@admin.com" ? (
         <td>
           {role === "instructor" ? (
             <button className="bg-red-100 p-2 rounded-md ">
@@ -71,6 +74,8 @@ const UserRow = ({ user, email, role, name, index, setReload, reload }) => {
             </button>
           )}
         </td>
+      ) : (
+        <button className="bg-red-100 p-2 rounded-md ">Super Admin</button>
       )}
       {/* <td>
         {role === "instructor" ? (

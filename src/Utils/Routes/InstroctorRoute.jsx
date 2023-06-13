@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const InstroctorRoute = () => {
+const InstroctorRoute = ({ children }) => {
   const [role, setRole] = useState({});
   const [singleUser, setSingleUser] = useState();
 
@@ -17,7 +17,9 @@ const InstroctorRoute = () => {
   //   console.log(singleUser);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/getrole/${singleUser}`)
+    fetch(
+      `https://summer-school-server-invalid2valid.vercel.app/getrole/${singleUser}`
+    )
       .then((res) => res.json())
       .then((data) => setRole(data))
       //   .then((data) => console.log(typeof data))
@@ -33,7 +35,7 @@ const InstroctorRoute = () => {
   if (user && role.role == "instructor") {
     return children;
   }
-  return <Navigate to="/" state={{ from: location }} replace></Navigate>;
+  // return <Navigate to="/" state={{ from: location }} replace></Navigate>;
 };
 
 export default InstroctorRoute;

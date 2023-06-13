@@ -6,7 +6,7 @@ const AllClasses = () => {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8000/classes")
+    fetch("https://summer-school-server-invalid2valid.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => setClassesData(data))
       .catch((error) => console.log(error));
