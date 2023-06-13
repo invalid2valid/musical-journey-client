@@ -23,12 +23,12 @@ const Home = () => {
       <Container>
         <AwesomeSlider className="mb-20">
           <div className="relative">
-            <div className=" w-full h-full bg-opacity-50 p-20 bg-black absolute z-20 text-white flex flex-col items-center justify-center">
-              <p className="text-4xl"> We Will Teach You How To Learn</p>
-              <h1 className=" text-5xl font-bold">
+            <div className=" text-center w-full h-full bg-opacity-50 p-20 bg-black absolute z-20 text-white flex flex-col items-center justify-center">
+              <p className=" md:text-4xl "> We Will Teach You How To Learn</p>
+              <h1 className=" md:text-5xl font-bold text-center">
                 BEST SCHOOL & MUSIC TO LEARN SMART WAY
               </h1>
-              <p className="text-4xl">
+              <p className="md:text-4xl">
                 A Theme for Kids , Learning & Course etc.
               </p>
             </div>
@@ -38,12 +38,12 @@ const Home = () => {
             />
           </div>
           <div className="relative">
-            <div className=" w-full h-full bg-opacity-50 p-20 bg-black absolute z-50 text-white flex flex-col items-center justify-center">
-              <p className="text-4xl"> We Will Teach You How To Learn</p>
-              <h1 className=" text-5xl font-bold">
+            <div className="text-center w-full h-full bg-opacity-50 p-20 bg-black absolute z-50 text-white flex flex-col items-center justify-center">
+              <p className="md:text-4xl"> We Will Teach You How To Learn</p>
+              <h1 className=" md:text-5xl font-bold">
                 BEST SCHOOL & MUSIC TO LEARN SMART WAY
               </h1>
-              <p className="text-4xl">
+              <p className="md:text-4xl">
                 A Theme for Kids , Learning & Course etc.
               </p>
             </div>
@@ -54,12 +54,12 @@ const Home = () => {
             />
           </div>
           <div className="relative">
-            <div className=" w-full h-full bg-opacity-50 p-20 bg-black absolute z-50 text-white flex flex-col items-center justify-center">
-              <p className="text-4xl"> We Will Teach You How To Learn</p>
-              <h1 className=" text-5xl font-bold">
+            <div className="text-center w-full h-full bg-opacity-50 p-20 bg-black absolute z-50 text-white flex flex-col items-center justify-center">
+              <p className="md:text-4xl"> We Will Teach You How To Learn</p>
+              <h1 className=" md:text-5xl font-bold">
                 BEST SCHOOL & MUSIC TO LEARN SMART WAY
               </h1>
-              <p className="text-4xl">
+              <p className="md:text-4xl">
                 A Theme for Kids , Learning & Course etc.
               </p>
             </div>
