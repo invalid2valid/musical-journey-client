@@ -24,3 +24,7 @@
 ## Live site link
 
 - https://summer-school-c22ad.web.app/
+
+## Server site link
+
+- https://github.com/invalid2valid/musical-journey-server
